@@ -26,8 +26,9 @@
 
 (defn find-php-files [path]
   (let [selected-file (clojure.java.io/file path)
-         children-files (file-seq selected-file)]
+         children-entries (file-seq selected-file)]
          (letfn [(match-name [regex file-name]
                     (not (empty? (re-matches regex (.getName file-name))))) ]
-          (->> children-files
+          (->> children-entries
+                  (filter #(.isFile %))
                   (filter #(match-name #".*\.php" %))))))
