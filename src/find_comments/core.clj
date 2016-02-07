@@ -38,10 +38,11 @@
     (let [r (range)]
       (letfn [(decorate-comment [[line content]]
                    {:line (inc line) :content content :type :single})
-                (zip [v] (map vector r v))]
+                (zip [v] (map vector r v))
+                (single-line-comment? [[_ line]] (.contains line "//"))]
         (->> (line-seq rdr) 
           zip
-          (filter #(.contains (second %) "//"))
+          (filter single-line-comment?)
           (map decorate-comment)
           (into []))))))
 
