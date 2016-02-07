@@ -39,9 +39,10 @@
 (defn find-comments-in [file]
   (with-open [rdr (clojure.java.io/reader (.getAbsolutePath file))]
     (let [r (range)]
-      (->> (line-seq rdr) 
-        ((fn [x] (map vector r x)))
-        (filter #(.contains (second %) "//"))
-        (map (fn [[line content]] {:line (inc line) :content content :type :single}))
-        (into [])))))
+      (letfn [(decorate-comment [[line content]] {:line (inc line) :content content :type :single})]
+        (->> (line-seq rdr) 
+          ((fn [x] (map vector r x)))
+          (filter #(.contains (second %) "//"))
+          (map decorate-comment)
+          (into []))))))
 
