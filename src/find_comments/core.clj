@@ -40,7 +40,8 @@
                    {:line (inc line) :content content :type :single})
                 (zip [v] (map vector r v))
                 (single-line-comment? [[_ line]] (.contains line "//"))]
-        (->> (line-seq rdr) 
+        (->> 
+          (line-seq rdr) 
           zip
           (filter single-line-comment?)
           (map decorate-comment)
