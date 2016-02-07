@@ -32,3 +32,19 @@
           (->> children-entries
                   (filter #(.isFile %))
                   (filter #(match-name #".*\.php" %))))))
+
+(with-open [rdr (clojure.java.io/reader "/etc/passwd")]
+         (count (line-seq rdr)))
+
+(defn find-comments-in [file]
+  (with-open [rdr (clojure.java.io/reader (.getAbsolutePath file))]
+    (let [r (range)]
+    (->> (line-seq rdr) 
+      ((fn [x] (map vector r x)))
+      ;;(fn [v] [r v])
+      ;;(fn [v] #{:comment v})
+      ;;(map vector)
+      (filter #(.contains (second %) "//"))
+      (map (fn [[line content]] {:line (inc line) :content content :type :single}))
+      (into [])
+      ))))
