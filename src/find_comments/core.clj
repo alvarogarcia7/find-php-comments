@@ -41,10 +41,7 @@
     (let [r (range)]
     (->> (line-seq rdr) 
       ((fn [x] (map vector r x)))
-      ;;(fn [v] [r v])
-      ;;(fn [v] #{:comment v})
-      ;;(map vector)
       (filter #(.contains (second %) "//"))
       (map (fn [[line content]] {:line (inc line) :content content :type :single}))
-      (into [])
-      ))))
+      (into [])))))
+
