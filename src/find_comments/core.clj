@@ -33,9 +33,6 @@
                   (filter #(.isFile %))
                   (filter #(match-name #".*\.php" %))))))
 
-(with-open [rdr (clojure.java.io/reader "/etc/passwd")]
-         (count (line-seq rdr)))
-
 (defn find-comments-in [file]
   (with-open [rdr (clojure.java.io/reader (.getAbsolutePath file))]
     (let [r (range)]
