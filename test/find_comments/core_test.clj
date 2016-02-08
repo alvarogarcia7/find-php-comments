@@ -22,5 +22,5 @@
     (names-for (find-php-files "dev-resources/matching_at_multiple_levels")) => ["file1.php" "file2.php"]))
 
 (facts "about finding comments"
-  (fact ""
+  (fact "single-line comment"
     (find-comments-in (file "dev-resources/sample_code/file1.php")) => [{:line 3 :content "other code //comment (single line)" :type :single}]))
