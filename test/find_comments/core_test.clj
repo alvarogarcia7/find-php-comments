@@ -23,4 +23,4 @@
 
 (facts "about finding comments"
   (fact "single-line comment"
-    (find-comments-in (file "dev-resources/sample_code/file1.php")) => [{:line 3 :content "other code //comment (single line)" :type :single}]))
+    (find-comments-in (file "dev-resources/sample_code/file1.php")) => [{:line 3 :content "other code //comment (single line)" :comment "comment (single line)" :type :single}]))
