@@ -15,9 +15,9 @@
 
 (facts "about finding files"
   (fact "do not find files with a bad extension"
-    (names-for (find-php-files "dev-resources/bad_extension")) => [])
+    (find-php-files "dev-resources/bad_extension") => [])
   (fact "do not find folders even if they match the pattern"
-    (names-for (find-php-files "dev-resources/folder_matching_pattern")) => [])
+    (find-php-files "dev-resources/folder_matching_pattern") => [])
   (fact "find files in the current directory and children"
     (names-for (find-php-files "dev-resources/matching_at_multiple_levels")) => ["file1.php" "file2.php"]))
 
